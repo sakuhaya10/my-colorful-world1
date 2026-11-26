@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MY COLORFUL WORLD</title>
+<style>
+:root {
+  --cream:#F8EEDB;
+  --paper:#FFF9ED;
+  --orange:#E9782E;
+  --yellow:#F4C52E;
+  --pink:#E94F88;
+  --green:#176B4D;
+  --blue:#3159A0;
+  --brown:#50392F;
+  --line:#D9C8A9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--brown);
+  font-family:Georgia,"Times New Roman",serif;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.topbar{
+  background:var(--green);color:white;padding:10px 5%;
+  display:flex;justify-content:space-between;gap:12px;
+  font:11px Arial,sans-serif;letter-spacing:2px;
+}
+header{
+  padding:45px 5% 28px;text-align:center;
+  background:var(--yellow);
+  border-bottom:5px solid var(--brown);
+}
+.kicker{font: bold 11px Arial,sans-serif;letter-spacing:4px}
+h1{
+  margin:15px 0 8px;color:var(--green);
+  font:900 clamp(38px,8vw,86px)/.95 Arial,sans-serif;
+  letter-spacing:-4px;
+}
+.tagline{font-size:19px;font-style:italic}
+.stars{font-size:25px;letter-spacing:10px;margin-top:18px}
+.nav{
+  position:sticky;top:0;z-index:10;background:var(--paper);
+  border-bottom:2px solid var(--brown);
+  padding:12px;display:flex;justify-content:center;
+  flex-wrap:wrap;gap:8px;
+}
+.nav a{
+  text-decoration:none;border:1px solid var(--brown);
+  border-radius:30px;padding:8px 13px;
+  font: bold 11px Arial,sans-serif;background:white;
+}
+.nav a:hover{background:var(--pink);color:white}
+main{max-width:1150px;margin:auto;padding:25px 18px 65px}
+.section{margin:35px 0;scroll-margin-top:85px}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;margin-bottom:17px;
+  border-bottom:3px solid var(--brown);padding-bottom:10px;
+}
+.section-head h2{
+  margin:0;font:bold clamp(24px,4vw,36px) Arial,sans-serif;
+  color:var(--green);
+}
+.section-head p{margin:0;font-style:italic;font-size:14px}
+.panel{
+  background:var(--paper);border:2px solid var(--brown);
+  border-radius:15px;padding:20px;
+  box-shadow:5px 5px 0 var(--line);
+}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gallery{overflow:hidden;background:#E9D6B7}
+.gallery img{
+  width:100%;height:clamp(230px,38vw,430px);
+  display:block;object-fit:cover;background:#E9D6B7;
+}
+.gallery-info{padding:15px}
+.gallery-info h3{
+  color:var(--orange);font:bold 25px Arial,sans-serif;margin:0 0 8px;
+}
+.small{font:12px/1.7 Arial,sans-serif}
+.btn{
+  background:var(--green);color:white;border:0;
+  padding:12px 19px;border-radius:30px;
+  font:bold 12px Arial,sans-serif;letter-spacing:1px;
+  box-shadow:3px 3px 0 var(--orange);
+}
+.btn:hover{background:var(--pink)}
+.btn:disabled{opacity:.5}
+.btn.orange{background:var(--orange)}
+.btn.pink{background:var(--pink)}
+#galleryStatus{font:12px Arial,sans-serif;min-height:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{
+  background:var(--paper);border:2px solid var(--brown);
+  border-radius:13px;padding:17px;
+  box-shadow:4px 4px 0 var(--line);
+}
+.card h3{margin:0 0 10px;font:bold 20px Arial,sans-serif}
+.card p{font-size:14px;line-height:1.6}
+.green{color:var(--green)}
+.orange-text{color:var(--orange)}
+.pink-text{color:var(--pink)}
+.blue-text{color:var(--blue)}
+.schedule-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:570px}
+th,td{border:1px solid var(--line);padding:8px;text-align:center}
+th{background:var(--yellow);font:bold 12px Arial,sans-serif}
+td{background:#FFFDF6}
+td input{
+  width:100%;min-width:65px;border:0;background:transparent;
+  text-align:center;color:var(--brown);font-size:12px;
+}
+td input:focus{outline:1px solid var(--green);background:white}
+input,textarea,select{
+  width:100%;padding:10px;border:1px solid var(--line);
+  border-radius:7px;background:white;color:var(--brown);
+}
+textarea{resize:vertical;min-height:75px}
+.field{margin:10px 0}
+.field label{display:block;font:bold 11px Arial,sans-serif;margin-bottom:5px}
+.list{padding-left:20px;line-height:2}
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;gap:9px;align-items:center;margin:10px 0}
+.checklist input{width:auto}
+.checklist input:checked+span{text-decoration:line-through;opacity:.55}
+.item-list{padding:0;list-style:none}
+.item-list li{
+  display:flex;justify-content:space-between;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--line);
+  font-size:13px;
+}
+.delete{
+  border:0;background:var(--pink);color:white;
+  border-radius:15px;padding:3px 9px;
+}
+.pill{
+  display:inline-block;background:var(--yellow);
+  border-radius:20px;padding:5px 10px;
+  font:bold 10px Arial,sans-serif;margin:3px;
+}
+.country-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.country{
+  padding:10px;background:#FFF9ED;border:1px solid var(--line);
+  border-radius:8px;font-size:13px;
+}
+.country input{width:auto}
+.quote{
+  background:var(--pink);color:white;padding:24px;
+  text-align:center;border-radius:14px;
+  font-size:20px;font-style:italic;
+}
+footer{
+  background:var(--green);color:white;text-align:center;
+  padding:30px 15px;font:11px Arial,sans-serif;letter-spacing:3px;
+}
+@media(max-width:750px){
+  .hero-grid,.grid2{grid-template-columns:1fr}
+  .grid4{grid-template-columns:1fr 1fr}
+  .country-grid{grid-template-columns:1fr 1fr}
+  header{padding-top:32px}
+  h1{letter-spacing:-2px}
+}
+@media(max-width:420px){
+  .grid4{grid-template-columns:1fr}
+  .topbar{font-size:9px}
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">
+  <span>✳ MY LITTLE UNIVERSE ✳</span>
+  <span>EST. 2026 · STAY COLORFUL</span>
+</div>
+
+<header id="home">
+  <div class="kicker">WELCOME TO MY HAPPY PLACE</div>
+  <h1>MY COLORFUL<br>WORLD!</h1>
+  <div class="tagline">Life is better in full color. ♡</div>
+  <div class="stars">✳ 🍊 ✳ 🌷 ✳</div>
+</header>
+
+<nav class="nav">
+  <a href="#home">HOME</a>
+  <a href="#inspiration">INSPIRATION</a>
+  <a href="#schedule">SCHEDULE</a>
+  <a href="#study">STUDY & WORK</a>
+  <a href="#mind">MIND & MEMO</a>
+  <a href="#creative">CREATIVE</a>
+  <a href="#life">LIFE & MONEY</a>
+  <a href="#world">WORLD MAP</a>
+  <a href="#journal">JOURNAL</a>
+</nav>
+
+<main>
+
+<!-- INSPIRATION -->
+<section class="section" id="inspiration">
+  <div class="section-head">
+    <h2>🌍 TODAY'S INSPIRATION</h2>
+    <p>A little escape around the world.</p>
+  </div>
+  <div class="panel gallery">
+    <img id="travelPhoto"
+      alt="Random travel inspiration"
+      src="https://placehold.co/1200x700/F4C52E/176B4D?text=YOUR+COLORFUL+WORLD">
+    <div class="gallery-info">
+      <h3 id="travelCountry">YOUR NEXT DESTINATION ♡</h3>
+      <p id="travelDescription">A different place, a different story.</p>
+      <div class="small" id="travelCredit"></div>
+      <br>
+      <button class="btn" id="nextPhoto">✈ ANOTHER TRIP!</button>
+      <p id="galleryStatus">Finding a little magic...</p>
+    </div>
+  </div>
+</section>
+
+<!-- WEEKLY SCHEDULE -->
+<section class="section" id="schedule">
+  <div class="section-head">
+    <h2>📅 MY WEEKLY LIFE</h2>
+    <p>Make every day count.</p>
+  </div>
+  <div class="panel">
+    <h3 class="green">TIME TABLE ✳</h3>
+    <p class="small">セルをクリックして授業・予定を入力できます。</p>
+    <div class="schedule-wrap">
+      <table id="timetable">
+        <thead>
+          <tr>
+            <th>TIME</th><th>MON</th><th>TUE</th>
+            <th>WED</th><th>THU</th><th>FRI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <script>
+          for(let i=1;i<=5;i++){
+            document.write("<tr><th>"+i+" PERIOD</th>");
+            for(let j=1;j<=5;j++){
+              document.write('<td><input aria-label="'+i+'限 '+j+'曜日" data-key="class-'+i+'-'+j+'" placeholder="＋"></td>');
+            }
+            document.write("</tr>");
+          }
+          </script>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2" style="margin-top:20px">
+      <div>
+        <h3 class="orange-text">✳ THIS WEEK'S TO DO</h3>
+        <div class="field">
+          <input id="todoInput" placeholder="Add a new task...">
+        </div>
+        <button class="btn orange" id="addTodo">＋ ADD TASK</button>
+        <ul class="checklist" id="todoList"></ul>
+      </div>
+      <div>
+        <h3 class="green">🎈 UPCOMING EVENTS</h3>
+        <div class="field">
+          <input id="eventDate" type="date">
+        </div>
+        <div class="field">
+          <input id="eventName" placeholder="Event name...">
+        </div>
+        <button class="btn" id="addEvent">＋ ADD EVENT</button>
+        <ul class="item-list" id="eventList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY -->
+<section class="section" id="study">
+  <div class="section-head">
+    <h2>🎓 01. STUDY & WORK</h2>
+    <p>Learn something new. Make something happen.</p>
+  </div>
+  <div class="grid4">
+    <div class="card">
+      <h3 class="green">📚 SCHOOL</h3>
+      <ul class="list small">
+        <li>授業・時間割</li><li>課題・レポート</li>
+        <li>ゼミ・研究</li><li>教職課程</li>
+        <li>試験・資格</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="orange-text">💼 WORK</h3>
+      <ul class="list small">
+        <li>塾講師・アルバイト</li><li>勤務スケジュール</li>
+        <li>インターン</li><li>業務メモ</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="pink-text">🚀 CAREER</h3>
+      <ul class="list small">
+        <li>企業研究</li><li>就活スケジュール</li>
+        <li>ES・面接</li><li>自己分析</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="blue-text">🏅 SKILLS</h3>
+      <ul class="list small">
+        <li>取得したい資格</li><li>勉強記録</li>
+        <li>学習目標</li><li>成長ログ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:17px">
+    <h3 class="green">📌 STUDY NOTES</h3>
+    <textarea data-save="studyNotes" placeholder="今日学んだこと、課題、研究メモなど..."></textarea>
+  </div>
+</section>
+
+<!-- MIND -->
+<section class="section" id="mind">
+  <div class="section-head">
+    <h2>✍️ 02. MIND & MEMO</h2>
+    <p>Collect thoughts, not things.</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 class="orange-text">📔 JOURNALING</h3>
+      <p>Daily reflection / Mood / Monthly goals</p>
+      <textarea data-save="mindJournal" placeholder="今日の気持ちや振り返り..."></textarea>
+    </div>
+    <div class="card">
+      <h3 class="green">🗒️ QUICK MEMO</h3>
+      <p>Random ideas / Things to remember</p>
+      <textarea data-save="quickMemo" placeholder="思いついたことを自由にメモ..."></textarea>
+    </div>
+    <div class="card">
+      <h3 class="pink-text">🌱 MY GOALS</h3>
+      <textarea data-save="myGoals" placeholder="今年の目標、今月の目標..."></textarea>
+    </div>
+    <div class="card">
+      <h3 class="blue-text">✨ HABIT TRACKER</h3>
+      <ul class="checklist">
+        <li><input type="checkbox" data-check="habit1"><span>読書</span></li>
+        <li><input type="checkbox" data-check="habit2"><span>勉強</span></li>
+        <li><input type="checkbox" data-check="habit3"><span>運動</span></li>
+        <li><input type="checkbox" data-check="habit4"><span>日記</span></li>
+        <li><input type="checkbox" data-check="habit5"><span>早寝</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVE -->
+<section class="section" id="creative">
+  <div class="section-head">
+    <h2>🎨 03. CREATIVE & PLAY</h2>
+    <p>Do more of what makes you happy.</p>
+  </div>
+  <div class="grid4">
+    <div class="card">
+      <h3 class="pink-text">🎬 MOVIES</h3>
+      <p class="small">映画・アニメ・ドラマ・鑑賞記録</p>
+      <textarea data-save="movies" placeholder="見たい作品・感想..."></textarea>
+    </div>
+    <div class="card">
+      <h3 class="green">📚 BOOKS</h3>
+      <p class="small">本・漫画・読みたいリスト</p>
+      <textarea data-save="books" placeholder="読みたい本・感想..."></textarea>
+    </div>
+    <div class="card">
+      <h3 class="orange-text">🎧 MUSIC</h3>
+      <p class="small">好きな曲・アーティスト・ライブ</p>
+      <textarea data-save="music" placeholder="お気に入りの音楽..."></textarea>
+    </div>
+    <div class="card">
+      <h3 class="blue-text">🖼️ CULTURE</h3>
+      <p class="small">展覧会・美術館・カフェ</p>
+      <textarea data-save="culture" placeholder="行きたい場所・感想..."></textarea>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:17px">
+    <h3 class="orange-text">💗 MY FAVORITE THINGS</h3>
+    <textarea data-save="favorites" placeholder="好きなもの、最近のお気に入り..."></textarea>
+  </div>
+</section>
+
+<!-- LIFE -->
+<section class="section" id="life">
+  <div class="section-head">
+    <h2>💰 04. LIFE & MONEY</h2>
+    <p>Dream big, save smart, live colorfully.</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3 class="green">💸 MONTHLY MONEY</h3>
+      <div class="field">
+        <label>MONTH</label>
+        <input type="month" id="moneyMonth">
+      </div>
+      <div class="field">
+        <label>INCOME（収入）</label>
+        <input type="number" id="income" placeholder="0">
+      </div>
+      <div class="field">
+        <label>EXPENSES（支出）</label>
+        <input type="number" id="expenses" placeholder="0">
+      </div>
+      <h3 class="orange-text" id="balance">BALANCE：¥0</h3>
+      <button class="btn" id="saveMoney">SAVE MONEY DATA</button>
+    </div>
+    <div class="card">
+      <h3 class="pink-text">🎁 MY WISH LIST</h3>
+      <p class="small">Travel / Beauty / Fashion / Experiences</p>
+      <input id="wishInput" placeholder="Add your little dream...">
+      <br><br>
+      <button class="btn pink" id="addWish">＋ ADD WISH</button>
+      <ul class="item-list" id="wishList"></ul>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:17px">
+    <h3 class="blue-text">✈️ TRAVEL FUND & DREAMS</h3>
+    <textarea data-save="travelDreams" placeholder="行きたい国、旅行予算、旅の計画..."></textarea>
+  </div>
+</section>
+
+<!-- WORLD -->
+<section class="section" id="world">
+  <div class="section-head">
+    <h2>🌎 MY COLORFUL WORLD MAP</h2>
+    <p>21 places. 21 different moods.</p>
+  </div>
+  <div class="panel">
+    <p class="small">いつか行きたい場所にチェックを入れてね ♡</p>
+    <div class="country-grid" id="countryList"></div>
+    <p id="countryCount" class="small"></p>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section class="section" id="journal">
+  <div class="section-head">
+    <h2>💌 A NOTE TO MYSELF</h2>
+    <p>Make today count.</p>
+  </div>
+  <div class="panel">
+    <div class="quote">"Little things make life beautiful." ♡</div>
+    <div class="field">
+      <label>DATE</label>
+      <input type="date" id="journalDate">
+    </div>
+    <div class="field">
+      <label>☀️ TODAY I WANT TO...</label>
+      <textarea data-save="journalToday" placeholder="今日やりたいこと..."></textarea>
+    </div>
+    <div class="field">
+      <label>🌷 SOMETHING I'M LOOKING FORWARD TO...</label>
+      <textarea data-save="journalFuture" placeholder="楽しみにしていること..."></textarea>
+    </div>
+    <div class="field">
+      <label>💗 A LITTLE THING THAT MADE ME SMILE...</label>
+      <textarea data-save="journalSmile" placeholder="今日嬉しかったこと..."></textarea>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  ✳ STAY CURIOUS · STAY COLORFUL · STAY YOU ✳
+  <p>MADE WITH LOVE, COFFEE & A LITTLE BIT OF CHAOS ♡</p>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const KEY = "myColorfulWorld_v1";
+
+let store = {};
+try {
+  store = JSON.parse(localStorage.getItem(KEY) || "{}");
+} catch(e) { store = {}; }
+
+function saveStore(){
+  try {
+    localStorage.setItem(KEY,JSON.stringify(store));
+  } catch(e) {
+    alert("保存できませんでした。ブラウザの保存設定を確認してください。");
+  }
+}
+
+document.querySelectorAll("[data-save]").forEach(el=>{
+  const key=el.dataset.save;
+  el.value=store[key] || "";
+  el.addEventListener("input",()=>{
+    store[key]=el.value;saveStore();
+  });
+});
+
+document.querySelectorAll("[data-key]").forEach(el=>{
+  const key=el.dataset.key;
+  el.value=store[key] || "";
+  el.addEventListener("input",()=>{
+    store[key]=el.value;saveStore();
+  });
+});
+
+document.querySelectorAll("[data-check]").forEach(el=>{
+  const key=el.dataset.check;
+  el.checked=!!store[key];
+  el.addEventListener("change",()=>{
+    store[key]=el.checked;saveStore();
+  });
+});
+
+// TASKS
+let todos=store.todos || [];
+function renderTodos(){
+  $("todoList").replaceChildren();
+  todos.forEach((item,i)=>{
+    const li=document.createElement("li");
+    const cb=document.createElement("input");
+    cb.type="checkbox";cb.checked=item.done;
+    cb.addEventListener("change",()=>{
+      todos[i].done=cb.checked;saveStore();renderTodos();
+    });
+    const span=document.createElement("span");
+    span.textContent=item.text;
+    if(item.done)span.style.textDecoration="line-through";
+    const del=document.createElement("button");
+    del.className="delete";del.textContent="×";
+    del.addEventListener("click",()=>{
+      todos.splice(i,1);saveStore();renderTodos();
+    });
+    li.append(cb,span,del);$("todoList").append(li);
+  });
+}
+$("addTodo").onclick=()=>{
+  const value=$("todoInput").value.trim();
+  if(!value)return;
+  todos.push({text:value,done:false});
+  $("todoInput").value="";saveStore();renderTodos();
+};
+renderTodos();
+
+// EVENTS
+let events=store.events || [];
+function renderEvents(){
+  $("eventList").replaceChildren();
+  events.forEach((event,i)=>{
+    const li=document.createElement("li");
+    const text=document.createElement("span");
+    text.textContent=(event.date ? event.date+" · " : "")+event.name;
+    const del=document.createElement("button");
+    del.className="delete";del.textContent="×";
+    del.onclick=()=>{events.splice(i,1);saveStore();renderEvents()};
+    li.append(text,del);$("eventList").append(li);
+  });
+}
+$("addEvent").onclick=()=>{
+  const name=$("eventName").value.trim();
+  if(!name)return;
+  events.push({name,date:$("eventDate").value});
+  $("eventName").value="";saveStore();renderEvents();
+};
+renderEvents();
+
+// WISHLIST
+let wishes=store.wishes || [];
+function renderWishes(){
+  $("wishList").replaceChildren();
+  wishes.forEach((wish,i)=>{
+    const li=document.createElement("li");
+    const text=document.createElement("span");
+    text.textContent="♡ "+wish;
+    const del=document.createElement("button");
+    del.className="delete";del.textContent="×";
+    del.onclick=()=>{wishes.splice(i,1);saveStore();renderWishes()};
+    li.append(text,del);$("wishList").append(li);
+  });
+}
+$("addWish").onclick=()=>{
+  const value=$("wishInput").value.trim();
+  if(!value)return;
+  wishes.push(value);$("wishInput").value="";
+  saveStore();renderWishes();
+};
+renderWishes();
+
+// MONEY
+$("moneyMonth").value=store.moneyMonth || new Date().toISOString().slice(0,7);
+$("income").value=store.income || "";
+$("expenses").value=store.expenses || "";
+function updateBalance(){
+  const balance=(Number($("income").value)||0)-(Number($("expenses").value)||0);
+  $("balance").textContent="BALANCE：¥"+balance.toLocaleString("ja-JP");
+}
+["income","expenses"].forEach(id=>$(id).addEventListener("input",updateBalance));
+$("saveMoney").onclick=()=>{
+  store.moneyMonth=$("moneyMonth").value;
+  store.income=$("income").value;
+  store.expenses=$("expenses").value;
+  saveStore();updateBalance();
+  alert("Money data saved! ♡");
+};
+updateBalance();
+
+// COUNTRY CHECKLIST
+const countries=[
+["🇳🇱","Netherlands"],["🇩🇪","Germany"],["🇮🇹","Italy"],
+["🇸🇪","Sweden"],["🇬🇧","United Kingdom"],["🇺🇸","United States"],
+["🇨🇳","Shanghai"],["🇨🇳","Harbin"],["🇭🇰","Hong Kong"],
+["🇹🇼","Taiwan"],["🇷🇴","Romania"],["🇱🇹","Lithuania"],
+["🇧🇪","Belgium"],["🇪🇸","Spain"],["🇫🇷","France"],
+["🇲🇬","Madagascar"],["🇱🇨","Saint Lucia"],["🇧🇴","Bolivia"],
+["🇯🇲","Jamaica"],["🇮🇳","India"],["🇵🇭","Philippines"]
+];
+const checkedCountries=store.countries || {};
+function renderCountries(){
+  $("countryList").replaceChildren();
+  let count=0;
+  countries.forEach(([flag,name])=>{
+    const label=document.createElement("label");
+    label.className="country";
+    const cb=document.createElement("input");
+    cb.type="checkbox";cb.checked=!!checkedCountries[name];
+    cb.onchange=()=>{
+      checkedCountries[name]=cb.checked;
+      saveStore();renderCountries();
+    };
+    if(cb.checked)count++;
+    label.append(cb,document.createTextNode(" "+flag+" "+name));
+    $("countryList").append(label);
+  });
+  $("countryCount").textContent=
+    "✈ "+count+" / 21 places checked off!";
+}
+renderCountries();
+
+// JOURNAL DATE
+$("journalDate").value=store.journalDate || new Date().toISOString().slice(0,10);
+$("journalDate").addEventListener("change",()=>{
+  store.journalDate=$("journalDate").value;saveStore();
+});
+
+// RANDOM PHOTO GALLERY
+const destinations=[
+["🇳🇱","NETHERLANDS","Netherlands Amsterdam"],
+["🇩🇪","GERMANY","Germany Christmas"],
+["🇮🇹","ITALY","Italy colorful village"],
+["🇸🇪","SWEDEN","Sweden winter"],
+["🇬🇧","UNITED KINGDOM","United Kingdom Christmas"],
+["🇺🇸","UNITED STATES","United States winter"],
+["🇨🇳","SHANGHAI","Shanghai China"],
+["🇨🇳","HARBIN","Harbin China winter"],
+["🇭🇰","HONG KONG","Hong Kong festive"],
+["🇹🇼","TAIWAN","Taiwan colorful street"],
+["🇷🇴","ROMANIA","Romania winter"],
+["🇱🇹","LITHUANIA","Lithuania Vilnius winter"],
+["🇧🇪","BELGIUM","Belgium Christmas"],
+["🇪🇸","SPAIN","Spain colorful architecture"],
+["🇫🇷","FRANCE","France Christmas"],
+["🇲🇬","MADAGASCAR","Madagascar landscape"],
+["🇱🇨","SAINT LUCIA","Saint Lucia Caribbean"],
+["🇧🇴","BOLIVIA","Bolivia colorful street"],
+["🇯🇲","JAMAICA","Jamaica colorful houses"],
+["🇮🇳","INDIA","India colorful architecture"],
+["🇵🇭","PHILIPPINES","Philippines colorful houses"]
+];
+const themes=[
+"colorful vintage interior",
+"Christmas decoration festive lights",
+"old town winter street",
+"vintage cafe architecture",
+"traditional winter market",
+"colorful kitchen furniture",
+"holiday table ceramics",
+"festive city lights"
+];
+let lastCountry="",lastTitle="";
+const stripHTML=s=>{
+  const d=document.createElement("div");
+  d.innerHTML=s||"";
+  return d.textContent||"";
+};
+function randomItem(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+async function loadPhoto(){
+  const button=$("nextPhoto");
+  button.disabled=true;
+  $("galleryStatus").textContent="✳ Exploring somewhere beautiful...";
+  try{
+    let choices=destinations.filter(d=>d[1]!==lastCountry);
+    const dest=randomItem(choices);
+    const query=dest[2]+" "+randomItem(themes);
+    const params=new URLSearchParams({
+      action:"query",generator:"search",gsrsearch:query,
+      gsrnamespace:"6",gsrlimit:"30",
+      prop:"imageinfo",iiprop:"url|extmetadata",
+      iiurlwidth:"1500",format:"json",
+      formatversion:"2",origin:"*"
+    });
+    const response=await fetch(
+      "https://commons.wikimedia.org/w/api.php?"+params
+    );
+    if(!response.ok)throw Error("Image service error");
+    const data=await response.json();
+    const pages=data.query?.pages||[];
+    const usable=pages.filter(p=>{
+      const info=p.imageinfo?.[0];
+      return info&&(info.thumburl||info.url)&&
+        /\.(jpg|jpeg|png|webp)$/i.test(p.title||"");
+    });
+    if(!usable.length)throw Error("No image found");
+    const options=usable.filter(p=>p.title!==lastTitle);
+    const selected=randomItem(options.length?options:usable);
+    const info=selected.imageinfo[0];
+    $("travelPhoto").src=info.thumburl||info.url;
+    $("travelCountry").textContent=dest[0]+" "+dest[1];
+    $("travelDescription").textContent=
+      "A little color, a little magic, a little escape.";
+    $("travelCredit").replaceChildren();
+    const artist=document.createElement("p");
+    artist.textContent="Photo: "+stripHTML(info.extmetadata?.Artist?.value||"Unknown");
+    const license=document.createElement("p");
+    license.textContent="License: "+stripHTML(info.extmetadata?.LicenseShortName?.value||"Check source");
+    const link=document.createElement("a");
+    link.href=info.descriptionurl;
+    link.target="_blank";link.rel="noopener noreferrer";
+    link.textContent="View original photo & license ↗";
+    $("travelCredit").append(artist,license,link);
+    lastCountry=dest[1];lastTitle=selected.title;
+    $("galleryStatus").textContent="♡ Your next little escape is ready!";
+  }catch(error){
+    console.error(error);
+    $("galleryStatus").textContent=
+      "画像を取得できませんでした。ボタンでもう一度お試しください。";
+  }finally{
+    button.disabled=false;
+  }
+}
+$("nextPhoto").addEventListener("click",loadPhoto);
+loadPhoto();
+
+// Page visibility refresh
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden)loadPhoto();
+});
+</script>
+</body>
+</html>
